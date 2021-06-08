@@ -26,6 +26,18 @@
                                 <% end %>
                                 </td>
                             <td><%= book.body %></td>
+                            <td>
+                                <% if book.favorited_by?(current_user) %>
+                                    <%= link_to book_favorites_path(book.id), method: :delete do %>
+                                        <i class="fas fa-heart red"><%= book.favorites.count %></i>
+                                    <% end %>
+                                <% else %>
+                                    <%= link_to book_favorites_path(book.id), method: :post do %>
+                                        <i class="fas fa-heart blue"><%= book.favorites.count %></i>
+                                    <% end %>
+                                <% end %>
+                            </td>
+                            <td>コメント数: <%= book.book_comments.count %></td>
                         </tr>
                     <% end %>
                 </tbody>
